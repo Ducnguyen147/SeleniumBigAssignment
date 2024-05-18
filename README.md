@@ -9,3 +9,5 @@
     `docker exec -it foldername-ubuntu-1 bash`
 - Clean && Test (All the actions will be visible in the testing environment):
     `gradle clean && gradle test`
+- Link to Pointing Sheet:
+    `https://docs.google.com/spreadsheets/d/1xyyIsE_Ivu4MLEId06-8W-LyHtmz9Z-zYaKLW69EwsY/edit#gid=972473320`
