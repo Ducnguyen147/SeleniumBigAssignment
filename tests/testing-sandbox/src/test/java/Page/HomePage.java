@@ -16,6 +16,10 @@ public class HomePage extends BasePage {
         return getText(homeMainLocator).contains("Home");
     }
 
+    public void hoverOverNewsElement() {
+        super.hoverOverElement(newsLocator);
+    }
+
     public void clickLogin() {
         click(loginLocator);
     }

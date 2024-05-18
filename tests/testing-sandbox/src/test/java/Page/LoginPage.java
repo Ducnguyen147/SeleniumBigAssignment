@@ -1,25 +1,33 @@
 package test.java.Page;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
-    private By usernameLoginLocator = By.xpath("//input[@id='user-identifier-input']");
-    private By continueButtonLocator = By.xpath("//button[@id='submit-button']");
-    private By pwLoginLocator = By.xpath("//input[@id='password-input']");
-    private By buttonSigninLocator = By.xpath("//button[@id='submit-button']");
+    private WebDriver driver;
+    private UsernamePage username;
+    private PasswordPage password;
+    private By errorMessageLocator = By.xpath("//p[@class='sb-form-message__content__text']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        this.username = new UsernamePage(driver);
+        this.password = new PasswordPage(driver);
     }
 
-    public void enterUsername(String username) {
-        type(usernameLoginLocator, username);
-        click(continueButtonLocator);
+    public void enterUsername(String usernameText) {
+        username.enterUsername(usernameText);
+        username.clickContinue();
     }
 
-    public void enterPassword(String password) {
-        type(pwLoginLocator, password);
-        click(buttonSigninLocator);
+    public void enterPassword(String passwordText) {
+        password.enterPassword(passwordText);
+        password.clickSignin();
+    }
+
+    public boolean isWrongUsername() {
+        waitForVisibility(errorMessageLocator);
+        System.out.println("Error message text: " + getText(errorMessageLocator));
+        return getText(errorMessageLocator).contains("You can try again");
     }
 }
-

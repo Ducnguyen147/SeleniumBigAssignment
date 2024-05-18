@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -12,6 +14,24 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
+
+    public void hoverOverElement(By locator) {
+        Actions actions = new Actions(driver);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        actions.moveToElement(element).perform();
+    }
+
+    public void navigateBack() {
+        driver.navigate().back();
+    }
+
+    public String generateRandomString(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
     }
 
     protected void click(By locator) {
