@@ -55,9 +55,10 @@ public class SeleniumTest {
         loginPage.enterUsername("jioserinjs@gmail.com");
         loginPage.enterPassword("jio12345?");
 
-        //Account page validation
+        //Account page validation and send form after log in
         AccountPage accountPage = new AccountPage(driver);
         Assert.assertTrue(accountPage.isAccountDisplayed());
+        accountPage.sendFormAfterLogin();
 
         //Sign out
         accountPage.signOut();
@@ -65,7 +66,6 @@ public class SeleniumTest {
         //Random data login
         homePage.clickLogin();
         String randomUsername = homePage.generateRandomString(10) + "@random.com";
-        String randomPassword = homePage.generateRandomString(10);
         loginPage.enterUsername(randomUsername);
         Assert.assertTrue(loginPage.isWrongUsername());
         this.driver.get("https://www.bbc.com/");
